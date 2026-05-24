@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M50 5 C35 30, 15 45, 15 65 A35 35 0 0 0 85 65 C85 45, 65 30, 50 5 Z"
+    fill="#E53935"
+  />
+
+  <rect x="45" y="31" width="10" height="28" fill="white" />
+  <rect x="36" y="40" width="28" height="10" fill="white" />
+
+  <polyline
+    points="15,76 30,76 38,66 45,86 55,62 65,76 85,76"
+    fill="none"
+    stroke="white"
+    stroke-width="2.5"
+  />
+</svg>
