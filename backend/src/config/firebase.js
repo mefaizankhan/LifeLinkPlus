@@ -17,25 +17,29 @@ export const initFirebase = () => {
             return;
         }
 
-        // Firebase key path
-        const serviceAccountPath =
-            process.env.FIREBASE_SERVICE_ACCOUNT ||
-            path.resolve("./serviceAccountKey.json");
-
-        // Check if file exists
-        if (!fs.existsSync(serviceAccountPath)) {
-
-            console.warn(
-                "⚠️ Firebase serviceAccountKey.json not found. Push notifications are disabled."
-            );
-
-            return;
-        }
-
         // Read service account
-        const serviceAccount = JSON.parse(
-            fs.readFileSync(serviceAccountPath, "utf8")
-        );
+        let serviceAccount;
+        if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+            serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+        } else {
+            // Firebase key path
+            const serviceAccountPath =
+                process.env.FIREBASE_SERVICE_ACCOUNT ||
+                path.resolve("./serviceAccountKey.json");
+
+            // Check if file exists
+            if (!fs.existsSync(serviceAccountPath)) {
+                console.warn(
+                    "⚠️ Firebase serviceAccountKey.json not found. Push notifications are disabled."
+                );
+                return;
+            }
+
+            // Read service account
+            serviceAccount = JSON.parse(
+                fs.readFileSync(serviceAccountPath, "utf8")
+            );
+        }
 
         // Initialize Firebase
         admin.initializeApp({
